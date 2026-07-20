@@ -1,5 +1,29 @@
 import { useState } from "react";
+
 import "./App.css";
+useEffect(() => {
+  const saved =
+    JSON.parse(
+      localStorage.getItem("products")
+    ) || [];
+
+  setProducts(saved);
+
+  const total =
+    saved.reduce(
+      (sum, p) => sum + p.price,
+      0
+    );
+
+  setRevenue(total);
+}, []);
+
+useEffect(() => {
+  localStorage.setItem(
+    "products",
+    JSON.stringify(products)
+  );
+}, [products]);
 
 function App() {
   const [products, setProducts] =
