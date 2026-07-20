@@ -1,34 +1,30 @@
+import { useState } from "react";
 import "./App.css";
 
 function App() {
-  return (
-    <div className="container">
-      <h1>Sales Tracker</h1>
+  const [products, setProducts] =
+    useState([]);
 
-      <div className="card">
-        <h2>Add Product</h2>
+  const [name, setName] =
+    useState("");
 
-        <input
-          type="text"
-          placeholder="Product Name"
-        />
+  const [price, setPrice] =
+    useState("");
 
-        <input
-          type="number"
-          placeholder="Price"
-        />
+  const addProduct = () => {
+    if (!name || !price) return;
 
-        <button>Add Product</button>
-      </div>
+    setProducts([
+      ...products,
+      {
+        id: Date.now(),
+        name,
+        price
+      }
+    ]);
 
-      <div className="card">
-        <h2>Dashboard</h2>
-
-        <p>Total Products: 0</p>
-        <p>Total Revenue: ₹0</p>
-      </div>
-    </div>
-  );
+    setName("");
+    setPrice("");
+  };
 }
-
-export default App;
+  export default App;
