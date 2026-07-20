@@ -1,64 +1,32 @@
-import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [products, setProducts] =
-    useState([]);
-
-  const [name, setName] =
-    useState("");
-
-  const [price, setPrice] =
-    useState("");
-
-  const addProduct = () => {
-    if (!name || !price) return;
-
-    setProducts([
-      ...products,
-      {
-        id: Date.now(),
-        name,
-        price
-      }
-    ]);
-
-    setName("");
-    setPrice("");
-  };
-
   return (
     <div className="container">
       <h1>Sales Tracker</h1>
 
-      <input
-        value={name}
-        onChange={(e) =>
-          setName(e.target.value)
-        }
-        placeholder="Product Name"
-      />
+      <div className="card">
+        <h2>Add Product</h2>
 
-      <input
-        value={price}
-        onChange={(e) =>
-          setPrice(e.target.value)
-        }
-        placeholder="Price"
-      />
+        <input
+          type="text"
+          placeholder="Product Name"
+        />
 
-      <button onClick={addProduct}>
-        Add Product
-      </button>
+        <input
+          type="number"
+          placeholder="Price"
+        />
 
-      <ul>
-        {products.map((product) => (
-          <li key={product.id}>
-            {product.name} - ₹
-            {product.price}
-          </li>
-        ))}
-      </ul>
+        <button>Add Product</button>
+      </div>
+
+      <div className="card">
+        <h2>Dashboard</h2>
+
+        <p>Total Products: 0</p>
+        <p>Total Revenue: ₹0</p>
+      </div>
     </div>
   );
 }
