@@ -26,5 +26,41 @@ function App() {
     setName("");
     setPrice("");
   };
+
+  return (
+    <div className="container">
+      <h1>Sales Tracker</h1>
+
+      <input
+        value={name}
+        onChange={(e) =>
+          setName(e.target.value)
+        }
+        placeholder="Product Name"
+      />
+
+      <input
+        value={price}
+        onChange={(e) =>
+          setPrice(e.target.value)
+        }
+        placeholder="Price"
+      />
+
+      <button onClick={addProduct}>
+        Add Product
+      </button>
+
+      <ul>
+        {products.map((product) => (
+          <li key={product.id}>
+            {product.name} - ₹
+            {product.price}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
-  export default App;
+
+export default App;
