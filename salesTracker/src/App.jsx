@@ -1,32 +1,77 @@
+import { useState } from "react";
 import "./App.css";
 
 function App() {
+  const [products, setProducts] =
+    useState([]);
+
+  const [name, setName] =
+    useState("");
+
+  const [price, setPrice] =
+    useState("");
+
+  const [revenue, setRevenue] =
+    useState(0);
+
+  const addProduct = () => {
+    if (!name || !price) return;
+
+    const product = {
+      id: Date.now(),
+      name,
+      price: Number(price)
+    };
+
+    setProducts([
+      ...products,
+      product
+    ]);
+
+    setRevenue(
+      revenue + product.price
+    );
+
+    setName("");
+    setPrice("");
+  };
+
   return (
     <div className="container">
       <h1>Sales Tracker</h1>
 
-      <div className="card">
-        <h2>Add Product</h2>
+      <input
+        value={name}
+        onChange={(e) =>
+          setName(e.target.value)
+        }
+        placeholder="Product Name"
+      />
 
-        <input
-          type="text"
-          placeholder="Product Name"
-        />
+      <input
+        value={price}
+        onChange={(e) =>
+          setPrice(e.target.value)
+        }
+        placeholder="Price"
+      />
 
-        <input
-          type="number"
-          placeholder="Price"
-        />
+      <button onClick={addProduct}>
+        Add Product
+      </button>
 
-        <button>Add Product</button>
-      </div>
+      <h2>
+        Total Revenue: ₹{revenue}
+      </h2>
 
-      <div className="card">
-        <h2>Dashboard</h2>
-
-        <p>Total Products: 0</p>
-        <p>Total Revenue: ₹0</p>
-      </div>
+      <ul>
+        {products.map((product) => (
+          <li key={product.id}>
+            {product.name} - ₹
+            {product.price}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
